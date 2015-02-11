@@ -106,7 +106,7 @@ $(call inherit-product-if-exists, hardware/ti/wpan/ti-wpan-products.mk)
 
 # Include Android userspace tests
 $(call inherit-product-if-exists, external/linaro-android-userspace-test/product.mk)
-$(call inherit-product-if-exists, device/linaro/hikey/dtb.mk)
+$(call inherit-product-if-exists, device/linaro/hikey/boot_fat.mk)
 
 ####### Copy build and install howtos for this build ########
 define copy-howto
