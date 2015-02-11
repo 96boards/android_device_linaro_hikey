@@ -1,0 +1,158 @@
+on init
+    # mount debugfs
+    mount debugfs /sys/kernel/debug /sys/kernel/debug
+     setprop wifi.interface wlan0
+    # Set this property so AdvancedWifiSettings would show the checkbox
+    # for Enable/Disable Active Roaming
+     setprop ro.wifi.active_roaming.enable true
+    # disable transparent huge pages
+    write /sys/kernel/mm/transparent_hugepage/enabled "never"
+
+    # See storage config details at http://source.android.com/tech/storage/
+    mkdir /mnt/shell/emulated 0700 shell shell
+    mkdir /storage/emulated 0555 root root
+    export EXTERNAL_STORAGE /storage/emulated/legacy
+    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
+    export EMULATED_STORAGE_TARGET /storage/emulated
+    # Support legacy paths
+    symlink /storage/emulated/legacy /sdcard
+    symlink /storage/emulated/legacy /mnt/sdcard
+    symlink /storage/emulated/legacy /storage/sdcard0
+    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
+
+    # Disabled virtual memory randomization
+    # (if randomization is enabled the AEM-JIT will have a lower cache hit rate)
+    write /proc/sys/kernel/randomize_va_space 0
+
+#bluetooth
+   #UART device
+   chmod 0660 /dev/ttyAMA1
+   chown bluetooth net_bt_stack /dev/ttyAMA1
+
+on fs
+    mount_all /fstab.hikey
+    setprop ro.crypto.fuse_sdcard false
+
+    mount configfs none /sys/kernel/config
+    mkdir /sys/kernel/config/usb_gadget/g1
+    mkdir /sys/kernel/config/usb_gadget/g1/functions/ffs.adb
+
+    mkdir /dev/usb-ffs 0770 shell shell
+    mkdir /dev/usb-ffs/adb 0770 shell shell
+    mount functionfs adb /dev/usb-ffs/adb uid=2000,gid=2000
+
+    write /sys/kernel/config/usb_gadget/g1/idVendor 0x12d1
+    write /sys/kernel/config/usb_gadget/g1/idProduct 0x103a
+    mkdir /sys/kernel/config/usb_gadget/g1/strings/0x409
+    write /sys/kernel/config/usb_gadget/g1/strings/0x409/serialnumber "0123456789"
+    write /sys/kernel/config/usb_gadget/g1/strings/0x409/manufacturer "HISILICON"
+    write /sys/kernel/config/usb_gadget/g1/strings/0x409/product "ADB Gadget"
+
+    mkdir /sys/kernel/config/usb_gadget/g1/configs/c.1
+    mkdir /sys/kernel/config/usb_gadget/g1/configs/c.1/strings/0x409
+    write /sys/kernel/config/usb_gadget/g1/configs/c.1/strings/0x409/configuration "Conf 1"
+    symlink /sys/kernel/config/usb_gadget/g1/functions/ffs.adb /sys/kernel/config/usb_gadget/g1/configs/c.1/ffs.adb
+    start adbd
+
+
+on post-fs-data
+    mkdir /data/media 0770 media_rw media_rw
+    mkdir /data/misc/gatord 0700 root root
+    mkdir /data/misc/wireless 0771 system system
+    mkdir /data/misc/wifi 0771 wifi wifi
+    mkdir /data/misc/wifi/sockets 0771 wifi wifi
+    mkdir /data/misc/wifi/wapi_certs 0777 wifi wifi
+    mkdir /data/misc/dhcp 0770 dhcp dhcp
+    # Set SELinux security contexts for files used by lava.
+    restorecon_recursive /data/local/tmp/lava
+
+on post-fs
+    # insert WiFi Modules
+       insmod /system/modules/rfkill.ko 
+       insmod /system/modules/cfg80211.ko 
+       insmod /system/modules/mac80211.ko 
+       insmod /system/modules/wlcore.ko 
+       insmod /system/modules/wl18xx.ko 
+       insmod /system/modules/wlcore_sdio.ko 
+       insmod /system/modules/ti_conf_wl18xx.ko
+
+
+    # Insert BT modules
+      insmod /system/modules/bluetooth.ko
+      insmod /system/modules/bnep.ko
+      insmod /system/modules/hidp.ko
+      insmod /system/modules/rfcomm.ko
+      insmod /system/modules/st_drv.ko
+      insmod /system/modules/tty_hci.ko
+      insmod /system/modules/btwilink.ko
+
+
+    # insert gator kernel module for DS-5/Streamline
+    insmod /system/modules/gator.ko
+
+    chmod 0666 /dev/ump
+    chmod 0666 /dev/ion
+    chmod 0666 /dev/mali0
+    chmod 0666 /dev/graphics/fb0
+
+on boot
+
+    setprop ARGH ARGH
+    setprop ro.radio.use-ppp no
+    setprop ro.build.product generic
+    setprop ro.product.device generic
+
+# fake some battery state
+    setprop status.battery.state Slow
+    setprop status.battery.level 5
+    setprop status.battery.level_raw  50
+    setprop status.battery.level_scale 9
+
+# Set Display density
+    setprop ro.sf.lcd_density 160
+
+# Set supported opengles version
+    setprop ro.opengles.version 196608
+
+# change permissions for process groups
+# https://bugs.launchpad.net/bugs/1037611
+    chmod 0660 /dev/cpuctl
+
+# enable Google-specific location features,
+# like NetworkLocationProvider and LocationCollector
+    setprop ro.com.google.locationfeatures 1
+
+# enable test harness
+    setprop ro.test_harness true
+
+    # Setup paths used for socket communication with the dhcp daemon (dhcpd)
+    mkdir /data/misc/dhcp 0770 dhcp dhcp
+    chown dhcp dhcp /data/misc/dhcp
+
+service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
+    class late_start
+
+on property:sys.usb.config=adb
+    write /sys/kernel/config/usb_gadget/g1/UDC "f72c0000.usb"
+    write /sys/class/udc/f72c0000.usb/soft_connect "disconnect"
+    write /sys/class/udc/f72c0000.usb/soft_connect "connect"
+    setprop sys.usb.state ${sys.usb.config} 
+
+#userspace daemon needed for bluetooth
+service uim /system/bin/uim
+    class main
+    user root
+    oneshot
+
+service wpa_supplicant /system/bin/wpa_supplicant \
+     -iwlan0 -Dwext -c/data/misc/wifi/wpa_supplicant.conf \
+     -e/data/misc/wifi/entropy.bin  -g@android:wpa_wlan0 -dd
+     socket wpa_wlan0 dgram 660 wifi wifi
+     class main
+     disabled
+     oneshot
+ 
+service dhcpcd_wlan0 /system/bin/dhcpcd -dABKL
+     group dhcp
+     disabled
+     oneshot
