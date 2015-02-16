@@ -129,6 +129,7 @@ PRODUCT_COPY_FILES += \
         device/linaro/hikey/bt-wifi-firmware-util/TIInit_11.8.32.bts:system/etc/firmware/TIInit_11.8.32.bts \
         device/linaro/hikey/bt-wifi-firmware-util/wl18xx-conf.bin:system/etc/firmware/ti-connectivity/wl18xx-conf.bin \
         device/linaro/hikey/bt-wifi-firmware-util/wl18xx-fw-2.bin:system/etc/firmware/ti-connectivity/wl18xx-fw-2.bin \
+        device/linaro/hikey/bt-wifi-firmware-util/wl18xx-fw-3.bin:system/etc/firmware/ti-connectivity/wl18xx-fw-3.bin \
         device/linaro/hikey/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
 
 HOWTOS := \
