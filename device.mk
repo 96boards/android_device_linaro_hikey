@@ -24,6 +24,15 @@ PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 			$(LOCAL_PATH)/ueventd.hikey.rc:root/ueventd.hikey.rc \
 			$(LOCAL_PATH)/hikey.kl:system/usr/keylayout/hikey.kl)
 
+#Copy Graphics binaries
+PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
+			$(LOCAL_PATH)/mali/64bit/libGLES_mali.so:system/lib64/egl/libGLES_mali.so\
+			$(LOCAL_PATH)/mali/64bit/gralloc.hi6210sft.so:system/lib64/gralloc.hi6210sft.so\
+			$(LOCAL_PATH)/mali/64bit/libion.so:system/lib64/libion.so \
+			$(LOCAL_PATH)/mali/32bit/libGLES_mali.so:system/lib/egl/libGLES_mali.so \
+			$(LOCAL_PATH)/mali/32bit/gralloc.hi6210sft.so:system/lib/gralloc.hi6210sft.so \
+			$(LOCAL_PATH)/mali/32bit/libion.so:system/lib/libion.so)
+
 # Copy preboot binaries
 PRE_BOOT_FILES := bl1.bin fip.bin
 PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
