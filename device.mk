@@ -39,6 +39,9 @@ PRODUCT_PACKAGES += ssh sftp scp sshd ssh-keygen sshd_config start-ssh uim wpa_s
 # Build and run only ART
 PRODUCT_RUNTIMES := runtime_libart_default
 
+# Build BT a2dp audio HAL
+PRODUCT_PACKAGES += audio.a2dp.default
+
 # Needed to sync the system clock with the RTC clock
 PRODUCT_PACKAGES += hwclock
 
@@ -126,7 +129,8 @@ PRODUCT_COPY_FILES += \
         device/linaro/hikey/bt-wifi-firmware-util/wl18xx-conf.bin:system/etc/firmware/ti-connectivity/wl18xx-conf.bin \
         device/linaro/hikey/bt-wifi-firmware-util/wl18xx-fw-2.bin:system/etc/firmware/ti-connectivity/wl18xx-fw-2.bin \
         device/linaro/hikey/bt-wifi-firmware-util/wl18xx-fw-3.bin:system/etc/firmware/ti-connectivity/wl18xx-fw-3.bin \
-        device/linaro/hikey/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
+        device/linaro/hikey/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+        device/linaro/hikey/audio/audio_policy.conf:system/etc/audio_policy.conf
 
 HOWTOS := \
         HOWTO_install.txt \
