@@ -126,9 +126,13 @@ PRODUCT_COPY_FILES += \
         frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
         device/linaro/hikey/bt-wifi-firmware-util/TIInit_11.8.32.bts:system/etc/firmware/ti-connectivity/TIInit_11.8.32.bts \
         device/linaro/hikey/bt-wifi-firmware-util/TIInit_11.8.32.bts:system/etc/firmware/TIInit_11.8.32.bts \
-        device/linaro/hikey/bt-wifi-firmware-util/wl18xx-conf.bin:system/etc/firmware/ti-connectivity/wl18xx-conf.bin \
-        device/linaro/hikey/bt-wifi-firmware-util/wl18xx-fw-2.bin:system/etc/firmware/ti-connectivity/wl18xx-fw-2.bin \
-        device/linaro/hikey/bt-wifi-firmware-util/wl18xx-fw-3.bin:system/etc/firmware/ti-connectivity/wl18xx-fw-3.bin \
+        device/linaro/hikey/bt-wifi-firmware-util/wl18xx-fw-4.bin:system/etc/firmware/ti-connectivity/wl18xx-fw-4.bin \
+        device/linaro/hikey/modules/compat.ko:system/modules/wifi/compat.ko \
+        device/linaro/hikey/modules/cfg80211.ko:system/modules/wifi/cfg80211.ko \
+        device/linaro/hikey/modules/mac80211.ko:system/modules/wifi/mac80211.ko \
+        device/linaro/hikey/modules/wlcore.ko:system/modules/wifi/wlcore.ko \
+        device/linaro/hikey/modules/wlcore_sdio.ko:system/modules/wifi/wlcore_sdio.ko \
+        device/linaro/hikey/modules/wl18xx.ko:system/modules/wifi/wl18xx.ko \
         device/linaro/hikey/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
         device/linaro/hikey/audio/audio_policy.conf:system/etc/audio_policy.conf
 
