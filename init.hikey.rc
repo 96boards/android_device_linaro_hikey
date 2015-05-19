@@ -79,13 +79,12 @@ on post-fs-data
 on post-fs
     # insert WiFi Modules
        insmod /system/modules/rfkill.ko
-       insmod /system/modules/compat.ko
-       insmod /system/modules/cfg80211.ko
-       insmod /system/modules/mac80211.ko
-       insmod /system/modules/wlcore.ko
-       insmod /system/modules/wl18xx.ko
-       #insmod /system/modules/wlcore_sdio.ko
-       insmod /system/modules/ti_conf_wl18xx.ko
+       insmod /system/modules/wifi/compat.ko
+       insmod /system/modules/wifi/cfg80211.ko
+       insmod /system/modules/wifi/mac80211.ko
+       insmod /system/modules/wifi/wlcore.ko
+       insmod /system/modules/wifi/wl18xx.ko
+       insmod /system/modules/wifi/wlcore_sdio.ko
 
 
     # Insert BT modules
@@ -169,7 +168,7 @@ service uim /system/bin/uim
 
 service wpa_supplicant /system/bin/wpa_supplicant \
      -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
-     -e/data/misc/wifi/entropy.bin  -g@android:wpa_wlan0 -dd
+     -e/data/misc/wifi/entropy.bin  -g@android:wpa_wlan0
      socket wpa_wlan0 dgram 660 wifi wifi
      class main
      disabled
