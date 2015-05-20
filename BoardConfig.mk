@@ -50,7 +50,7 @@ TARGET_TOOLS_PREFIX ?= $(realpath $(TOP))/prebuilts/gcc/linux-x86/aarch64/aarch6
 endif
 
 # Kernel Config
-KERNEL_CONFIG = arch/arm64/configs/defconfig android/configs/android-base.cfg
+KERNEL_CONFIG = arch/arm64/configs/defconfig android/configs/android-base.cfg  android/configs/android-recommended.cfg
 # Kernel Source and Device Tree
 TARGET_KERNEL_SOURCE ?= kernel/linaro/hisilicon
 DEVICE_TREES := hi6220-hikey:hi6220-hikey.dtb
