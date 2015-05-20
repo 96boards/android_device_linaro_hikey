@@ -160,6 +160,12 @@ on property:sys.usb.config=adb
     write /sys/class/udc/f72c0000.usb/soft_connect "connect"
     setprop sys.usb.state ${sys.usb.config}
 
+on property:usb_speed.switch=high
+    write /sys/kernel/debug/f72c0000.usb/config "0"
+
+on property:usb_speed.switch=full
+    write /sys/kernel/debug/f72c0000.usb/config "1"
+
 #userspace daemon needed for bluetooth
 service uim /system/bin/uim
     class main
