@@ -45,6 +45,9 @@ PRODUCT_PACKAGES += audio.a2dp.default
 # Needed to sync the system clock with the RTC clock
 PRODUCT_PACKAGES += hwclock
 
+# Include USB speed switch App
+PRODUCT_PACKAGES += UsbSpeedSwitch
+
 # Build libion for new double-buffering HDLCD driver
 PRODUCT_PACKAGES += libion
 
