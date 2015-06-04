@@ -33,7 +33,6 @@ CONFIG_DRIVER_NL80211 := y
 CONFIG_DRIVER_WEXT :=y
 
 
-BOARD_KERNEL_CMDLINE := k3v2mem hisi_dma_print=0 vmalloc=484M no_irq_affinity loglevel=7 androidboot.hardware=hikey selinux=0
 BOARD_KERNEL_BASE := 0x07400000
 BOARD_DTB_ADDR := 0x09e00000
 BOARD_RAMDISK_OFFSET := 0x07c00000
@@ -55,6 +54,7 @@ KERNEL_CONFIG = arch/arm64/configs/defconfig android/configs/android-base.cfg  a
 TARGET_KERNEL_SOURCE ?= kernel/linaro/hisilicon
 DEVICE_TREES := hi6220-hikey:hi6220-hikey.dtb
 BUILD_KERNEL_MODULES ?= true
+GATOR_DAEMON_PATH := $(TARGET_KERNEL_SOURCE)
 
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_KERNEL := false
@@ -73,3 +73,4 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 131072
 TARGET_USE_PAN_DISPLAY := true
 
+BOARD_SEPOLICY_DIRS += device/linaro/build/sepolicy

@@ -108,8 +108,6 @@ on post-fs
 
     chmod 0666 /dev/ump
     chmod 0666 /dev/ion
-    chmod 0666 /dev/mali
-    chown system.graphics /dev/mali
     chmod 0666 /dev/graphics/fb0
 
 on boot

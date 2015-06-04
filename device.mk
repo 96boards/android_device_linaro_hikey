@@ -69,6 +69,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.zygote=zygote64_32
 PRODUCT_PROPERTY_OVERRIDES += \
          debug.sf.no_hw_vsync=1
 
+
 PRODUCT_COPY_FILES += system/core/rootdir/init.zygote64_32.rc:root/init.zygote64_32.rc
 
 #enable consle even built in user mode
@@ -104,7 +105,8 @@ PRODUCT_COPY_FILES += device/linaro/build/media_codecs.xml:system/etc/media_code
 $(call inherit-product-if-exists, device/linaro/build/extra-and-tests.mk)
 
 # Include BT modules
-$(call inherit-product-if-exists, hardware/ti/wpan/ti-wpan-products.mk)
+#$(call inherit-product-if-exists, hardware/ti/wpan/ti-wpan-products.mk)
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += config.disable_bluetooth=true
 
 # Include Android userspace tests
 $(call inherit-product-if-exists, external/linaro-android-userspace-test/product.mk)
