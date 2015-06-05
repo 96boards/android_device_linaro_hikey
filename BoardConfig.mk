@@ -74,3 +74,4 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 TARGET_USE_PAN_DISPLAY := true
 
 BOARD_SEPOLICY_DIRS += device/linaro/build/sepolicy
+BOARD_SEPOLICY_DIRS += device/linaro/hikey/sepolicy
