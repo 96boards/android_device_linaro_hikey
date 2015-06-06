@@ -55,6 +55,7 @@ KERNEL_CONFIG = arch/arm64/configs/defconfig android/configs/android-base.cfg  a
 TARGET_KERNEL_SOURCE ?= kernel/linaro/hisilicon
 DEVICE_TREES := hi6220-hikey:hi6220-hikey.dtb
 BUILD_KERNEL_MODULES ?= true
+GATOR_DAEMON_PATH := $(TARGET_KERNEL_SOURCE)
 
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_KERNEL := false
@@ -73,3 +74,21 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 131072
 TARGET_USE_PAN_DISPLAY := true
 
+BOARD_SEPOLICY_DIRS += device/linaro/build/sepolicy
+BOARD_SEPOLICY_UNION += \
+        file_contexts \
+        gatord.te  \
+        init.te  \
+        kernel.te  \
+        logd.te  \
+        mediaserver.te  \
+        netd.te  \
+        shell.te  \
+        surfaceflinger.te
+
+BOARD_SEPOLICY_DIRS += device/linaro/hikey/sepolicy
+BOARD_SEPOLICY_UNION += \
+        file.te \
+        genfs_contexts \
+        init.te \
+        kernel.te
