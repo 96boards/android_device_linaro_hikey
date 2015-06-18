@@ -104,8 +104,10 @@ PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 # Copy media codecs config file
 PRODUCT_COPY_FILES += device/linaro/build/media_codecs.xml:system/etc/media_codecs.xml
 
+ifeq ($(INCLUDE_TESTS), 1)
 # Include application and binaries needed for test
 $(call inherit-product-if-exists, device/linaro/build/extra-and-tests.mk)
+endif
 
 # Include BT modules
 $(call inherit-product-if-exists, hardware/ti/wpan/ti-wpan-products.mk)
