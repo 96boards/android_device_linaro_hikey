@@ -94,8 +94,12 @@ PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 			$(LOCAL_PATH)/mali/64bit/libGLES_mali.so:system/lib64/egl/libGLES_mali.so\
 			$(LOCAL_PATH)/mali/64bit/gralloc.hikey.so:system/lib64/hw/gralloc.hikey.so\
+			$(LOCAL_PATH)/mali/64bit/hwcomposer.hikey.so:system/lib64/hw/hwcomposer.hikey.so\
+			$(LOCAL_PATH)/mali/64bit/libdrm.so:system/lib64/libdrm.so \
 			$(LOCAL_PATH)/mali/32bit/libGLES_mali.so:system/lib/egl/libGLES_mali.so \
-			$(LOCAL_PATH)/mali/32bit/gralloc.hikey.so:system/lib/hw/gralloc.hikey.so)
+			$(LOCAL_PATH)/mali/32bit/gralloc.hikey.so:system/lib/hw/gralloc.hikey.so \
+			$(LOCAL_PATH)/mali/32bit/hwcomposer.hikey.so:system/lib/hw/hwcomposer.hikey.so \
+			$(LOCAL_PATH)/mali/32bit/libdrm.so:system/lib/libdrm.so)
 
 # Copy media codecs config file
 PRODUCT_COPY_FILES += device/linaro/build/media_codecs.xml:system/etc/media_codecs.xml
