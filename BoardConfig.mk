@@ -20,7 +20,6 @@ ANDROID_64=true
 #WITH_DEXPREOPT ?= true
 USE_OPENGL_RENDERER := true
 ANDROID_ENABLE_RENDERSCRIPT := true
-BIONIC_TESTS ?= true
 
 # BT configs
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := "device/linaro/hikey/bluetooth"
