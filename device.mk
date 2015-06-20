@@ -61,9 +61,6 @@ PRODUCT_PACKAGES += gralloc.hikey
 PRODUCT_PACKAGES += iontest \
                     ion-unit-tests
 
-# Copy dhcpcd
-PRODUCT_PACKAGES += dhcpcd.conf
-
 # Set zygote config
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.zygote=zygote64_32
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -71,24 +68,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_COPY_FILES += system/core/rootdir/init.zygote64_32.rc:root/init.zygote64_32.rc
 
-#enable consle even built in user mode
-ADDITIONAL_DEFAULT_PROPERTIES += ro.debuggable=1
-
-# set ART to use compilation mode
-# ART will now what to pick up for compilation if this setting is not set.
-ADDITIONAL_BUILD_PROPERTIES += dalvik.vm.dex2oat-filter=""
-
 # Copy hardware config file(s)
 PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
                         device/linaro/build/android.hardware.screen.xml:system/etc/permissions/android.hardware.screen.xml \
-                        device/linaro/build/disablesuspend.sh:system/bin/disablesuspend.sh \
                         frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml \
                         frameworks/native/data/etc/android.software.app_widgets.xml:system/etc/permissions/android.software.app_widgets.xml \
                         frameworks/native/data/etc/android.software.backup.xml:system/etc/permissions/android.software.backup.xml \
                         frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml)
-
-PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
-                        device/linaro/build/eth0_dns.sh:system/bin/eth0_dns.sh)
 
 #Copy Graphics binaries
 PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
@@ -101,19 +87,9 @@ PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 			$(LOCAL_PATH)/mali/32bit/hwcomposer.hikey.so:system/lib/hw/hwcomposer.hikey.so \
 			$(LOCAL_PATH)/mali/32bit/libdrm.so:system/lib/libdrm.so)
 
-# Copy media codecs config file
-PRODUCT_COPY_FILES += device/linaro/build/media_codecs.xml:system/etc/media_codecs.xml
-
-ifeq ($(INCLUDE_TESTS), 1)
-# Include application and binaries needed for test
-$(call inherit-product-if-exists, device/linaro/build/extra-and-tests.mk)
-endif
-
 # Include BT modules
 $(call inherit-product-if-exists, hardware/ti/wpan/ti-wpan-products.mk)
 
-# Include Android userspace tests
-$(call inherit-product-if-exists, external/linaro-android-userspace-test/product.mk)
 $(call inherit-product-if-exists, device/linaro/hikey/boot_fat.mk)
 
 ####### Copy build and install howtos for this build ########
@@ -158,3 +134,6 @@ PRODUCT_COPY_FILES += \
 endif
 
 $(foreach howto,$(HOWTOS),$(eval $(call copy-howto,$(howto))))
+
+INCLUDE_TESTS := 0
+$(call inherit-product-if-exists, device/linaro/build/common-device.mk)
