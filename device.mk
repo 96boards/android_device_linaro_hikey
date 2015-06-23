@@ -67,9 +67,7 @@ PRODUCT_PACKAGES += dhcpcd.conf
 # Set zygote config
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.zygote=zygote64_32
 PRODUCT_PROPERTY_OVERRIDES += \
-         ro.kernel.qemu=1 \
-         debug.sf.no_hw_vsync=1 \
-         ro.kernel.qemu.gles=0
+         debug.sf.no_hw_vsync=1
 
 PRODUCT_COPY_FILES += system/core/rootdir/init.zygote64_32.rc:root/init.zygote64_32.rc
 
@@ -95,11 +93,11 @@ PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
                         device/linaro/build/eth0_dns.sh:system/bin/eth0_dns.sh)
 
 #Copy Graphics binaries
-# PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
-                        vendor/arm/64b/libGLES_mali.so:system/lib64/libGLES_mali.so \
-                        vendor/arm/64b/libGLES_mali.so:system/lib64/egl/libGLES_mali.so \
-                        vendor/arm/32b/libGLES_mali.so:system/lib/libGLES_mali.so \
-                        vendor/arm/32b/libGLES_mali.so:system/lib/egl/libGLES_mali.so)
+PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
+                       vendor/mali/64bit/libGLES_mali.so:system/lib64/egl/libGLES_mali.so\
+                       vendor/mali/64bit/gralloc.hikey.so:system/lib64/hw/gralloc.hikey.so\
+                       vendor/mali/32bit/libGLES_mali.so:system/lib/egl/libGLES_mali.so \
+                       vendor/mali/32bit/gralloc.hikey.so:system/lib/hw/gralloc.hikey.so)
 
 # Copy media codecs config file
 PRODUCT_COPY_FILES += device/linaro/build/media_codecs.xml:system/etc/media_codecs.xml
