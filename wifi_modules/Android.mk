@@ -1,3 +1,4 @@
+ifeq (hikey, $(TARGET_PRODUCT))
 export TOOLCHAIN_URL=https://releases.linaro.org/15.02/components/toolchain/binaries/aarch64-linux-gnu/gcc-linaro-4.9-2015.02-3-x86_64_aarch64-linux-gnu.tar.xz
 export TOOLCHAIN_DIR=$(shell basename ${TOOLCHAIN_URL} .tar.xz )
 export TOOLCHAIN_TARBALL=$(shell basename ${TOOLCHAIN_URL} )
@@ -24,3 +25,4 @@ wifi_modules: android_kernel
 	cp `find $(REALTOP)/$(PRODUCT_OUT)/obj/wifi-build/kernel/build-utilites/src -iname *.ko` $(REALTOP)/$(PRODUCT_OUT)/system/modules/wifi/
 
 systemimage: wifi_modules
+endif
