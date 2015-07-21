@@ -21,17 +21,6 @@ ANDROID_64=true
 USE_OPENGL_RENDERER := true
 ANDROID_ENABLE_RENDERSCRIPT := true
 
-# BT configs
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := "device/linaro/hikey/bluetooth"
-BOARD_HAVE_BLUETOOTH := true
-
-# generic wifi
-WPA_SUPPLICANT_VERSION := VER_0_8_X
-BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-CONFIG_DRIVER_NL80211 := y
-CONFIG_DRIVER_WEXT :=y
-
-
 BOARD_KERNEL_CMDLINE := k3v2mem hisi_dma_print=0 vmalloc=484M no_irq_affinity loglevel=7 androidboot.hardware=hikey selinux=0
 BOARD_KERNEL_BASE := 0x07400000
 BOARD_DTB_ADDR := 0x09e00000
