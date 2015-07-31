@@ -163,6 +163,15 @@ on property:sys.usb.config=adb
     write /sys/class/udc/f72c0000.usb/soft_connect "connect"
     setprop sys.usb.state ${sys.usb.config}
 
+# FIXME: we need to bind the driver while adbd is restarted. We need delay else bind fails. Need to investigate
+on property:init.svc.adbd=running
+    wait /dev/socket/hack 1
+    write /sys/kernel/config/usb_gadget/g1/UDC "f72c0000.usb"
+    write /sys/class/udc/f72c0000.usb/soft_connect "disconnect"
+    write /sys/class/udc/f72c0000.usb/soft_connect "connect"
+    setprop sys.usb.state ${sys.usb.config}
+
+
 on property:usb_speed.switch=high
     write /sys/kernel/debug/f72c0000.usb/config "0"
 
