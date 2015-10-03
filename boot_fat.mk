@@ -1,3 +1,4 @@
+.PHONY: bootimage all_dtbs
 
 REALTOP=$(realpath $(TOP))
 FASTBOOT_EFI_BUILD_NUMBER := `wget -q --no-check-certificate -O - https://ci.linaro.org/job/96boards-hikey-uefi/lastSuccessfulBuild/buildNumber`
