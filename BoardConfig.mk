@@ -22,8 +22,8 @@ USE_OPENGL_RENDERER := true
 ANDROID_ENABLE_RENDERSCRIPT := true
 
 # BT configs
-# BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := "device/linaro/hikey/bluetooth"
-# BOARD_HAVE_BLUETOOTH := true
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := "device/linaro/hikey/bluetooth"
+BOARD_HAVE_BLUETOOTH := true
 
 # generic wifi
 # WPA_SUPPLICANT_VERSION := VER_0_8_X
