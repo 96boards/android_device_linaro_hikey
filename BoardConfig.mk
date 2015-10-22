@@ -26,10 +26,10 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := "device/linaro/hikey/bluetooth"
 BOARD_HAVE_BLUETOOTH := true
 
 # generic wifi
-# WPA_SUPPLICANT_VERSION := VER_0_8_X
-# BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-# CONFIG_DRIVER_NL80211 := y
-# CONFIG_DRIVER_WEXT :=y
+WPA_SUPPLICANT_VERSION := VER_0_8_X
+BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+CONFIG_DRIVER_NL80211 := y
+CONFIG_DRIVER_WEXT := y
 
 
 BOARD_KERNEL_CMDLINE := k3v2mem hisi_dma_print=0 vmalloc=484M no_irq_affinity loglevel=7 androidboot.hardware=hikey selinux=0
@@ -53,7 +53,7 @@ KERNEL_CONFIG = hikey_defconfig
 # Kernel Source and Device Tree
 TARGET_KERNEL_SOURCE ?= kernel/linaro/hisilicon
 DEVICE_TREES := hi6220-hikey:hi6220-hikey.dtb
-BUILD_KERNEL_MODULES = false
+BUILD_KERNEL_MODULES = true
 GATOR_DAEMON_PATH := $(TARGET_KERNEL_SOURCE)
 
 TARGET_NO_BOOTLOADER := true
