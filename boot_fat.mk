@@ -14,7 +14,7 @@ boot_fatimage: bootimage all_dtbs
 	cp $(PRODUCT_OUT)/grubaa64.efi  $(PRODUCT_OUT)/EFI/BOOT/
 	cp $(PRODUCT_OUT)/fastboot.efi  $(PRODUCT_OUT)/EFI/BOOT/
 	dd if=/dev/zero of=$(PRODUCT_OUT)/boot_fat.uefi.img bs=512 count=98304
-	mkfs.fat -n "BOOT IMG" $(PRODUCT_OUT)/boot_fat.uefi.img
+	mkfs.fat -n "boot" $(PRODUCT_OUT)/boot_fat.uefi.img
 	mcopy -i  $(PRODUCT_OUT)/boot_fat.uefi.img $(PRODUCT_OUT)/obj/kernel/arch/arm64/boot/Image ::Image
 	mcopy -i  $(PRODUCT_OUT)/boot_fat.uefi.img $(PRODUCT_OUT)/obj/kernel/arch/arm64/boot/hi6220-hikey.dtb ::hi6220-hikey.dtb
 	mcopy -i $(PRODUCT_OUT)/boot_fat.uefi.img $(PRODUCT_OUT)/ramdisk.img ::ramdisk.img
