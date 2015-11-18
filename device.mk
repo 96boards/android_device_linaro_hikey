@@ -131,5 +131,4 @@ $(foreach howto,$(HOWTOS),$(eval $(call copy-howto,$(howto))))
 # Copy media codecs config file
 PRODUCT_COPY_FILES += device/linaro/build/media_codecs.xml:system/etc/media_codecs.xml
 
-INCLUDE_TESTS := 0
 $(call inherit-product-if-exists, device/linaro/build/common-device.mk)
