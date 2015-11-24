@@ -1,1 +1,4 @@
 /dev/hci_tty     0666 root root
+/dev/mali        0666 system graphics
+#bluetooth
+/dev/ttyAMA1     0660 bluetooth net_bt_stack

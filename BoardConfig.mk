@@ -77,13 +77,18 @@ BOARD_SEPOLICY_DIRS += device/linaro/build/sepolicy
 BOARD_SEPOLICY_UNION += \
         file_contexts \
         gatord.te  \
+        hci_attach.te \
+        healthd.te \
         init.te  \
         kernel.te  \
+        linaro.te \
         logd.te  \
         mediaserver.te  \
         netd.te  \
         shell.te  \
-        surfaceflinger.te
+        surfaceflinger.te \
+        toolbox.te \
+        zygote.te
 
 BOARD_SEPOLICY_DIRS += device/linaro/hikey/sepolicy
 BOARD_SEPOLICY_UNION += \
