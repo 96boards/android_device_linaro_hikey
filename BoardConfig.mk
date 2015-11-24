@@ -53,7 +53,7 @@ KERNEL_CONFIG = hikey_defconfig
 # Kernel Source and Device Tree
 TARGET_KERNEL_SOURCE ?= kernel/linaro/hisilicon
 DEVICE_TREES := hi6220-hikey:hi6220-hikey.dtb
-BUILD_KERNEL_MODULES = true
+BUILD_KERNEL_MODULES = false
 GATOR_DAEMON_PATH := $(TARGET_KERNEL_SOURCE)
 
 TARGET_NO_BOOTLOADER := true
