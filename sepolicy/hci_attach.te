@@ -1,0 +1,1 @@
+allow hci_attach self:capability dac_override;

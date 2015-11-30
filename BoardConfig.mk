@@ -73,26 +73,19 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 131072
 TARGET_USE_PAN_DISPLAY := true
 
-BOARD_SEPOLICY_DIRS += device/linaro/build/sepolicy
-BOARD_SEPOLICY_UNION += \
-        file_contexts \
-        gatord.te  \
-        hci_attach.te \
-        healthd.te \
-        init.te  \
-        kernel.te  \
-        linaro.te \
-        logd.te  \
-        mediaserver.te  \
-        netd.te  \
-        shell.te  \
-        surfaceflinger.te \
-        toolbox.te \
-        zygote.te
-
 BOARD_SEPOLICY_DIRS += device/linaro/hikey/sepolicy
 BOARD_SEPOLICY_UNION += \
+        debuggerd.te \
+        dex2oat.te \
+        drmserver.te \
+        file_contexts \
         file.te \
         genfs_contexts \
+        hci_attach.te \
+        healthd.te \
         init.te \
-        kernel.te
+        kernel.te  \
+        netd.te  \
+        shell.te  \
+        toolbox.te \
+        zygote.te

@@ -1,3 +1,12 @@
 allow init configfs:dir { write add_name create };
 allow init configfs:file { write };
 allow init configfs:lnk_file { create };
+
+allow init tmpfs:lnk_file create_file_perms;
+allow init cache_file:dir mounton;
+allow init storage_file:dir mounton;
+
+allow init self:capability { sys_module sys_pacct };
+allow init bootchart_data_file:file { append };
+
+allow init shell_data_file:lnk_file { getattr };

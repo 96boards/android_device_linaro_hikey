@@ -1,0 +1,4 @@
+allow zygote self:capability sys_nice;
+
+# For CONFIG_MODULES
+allow zygote kernel:system module_request;
