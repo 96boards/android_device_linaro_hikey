@@ -75,6 +75,9 @@ TARGET_USE_PAN_DISPLAY := true
 
 BOARD_SEPOLICY_DIRS += device/linaro/hikey/sepolicy
 BOARD_SEPOLICY_UNION += \
+        debuggerd.te \
+        dex2oat.te \
+        drmserver.te \
         file_contexts \
         file.te \
         genfs_contexts \
