@@ -1,2 +1,0 @@
-# For CONFIG_MODULES
-allow dex2oat kernel:system module_request;

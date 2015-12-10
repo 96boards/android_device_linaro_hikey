@@ -4,6 +4,3 @@ allow kernel device:dir { write add_name rmdir remove_name rmdir remove_name};
 allow kernel device:chr_file { create setattr getattr unlink };
 
 allow kernel shell_data_file:file { read write };
-
-# For CONFIG_MODULES
-allow kernel self:system { module_request };
