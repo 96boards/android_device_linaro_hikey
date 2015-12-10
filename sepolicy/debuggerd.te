@@ -1,2 +1,0 @@
-# For CONFIG_MODULES
-allow debuggerd kernel:system module_request;

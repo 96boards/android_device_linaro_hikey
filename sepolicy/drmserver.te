@@ -1,2 +1,0 @@
-# For CONFIG_MODULES
-allow drmserver kernel:system module_request;
