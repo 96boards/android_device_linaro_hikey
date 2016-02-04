@@ -21,6 +21,10 @@ ANDROID_64=true
 USE_OPENGL_RENDERER := true
 ANDROID_ENABLE_RENDERSCRIPT := true
 
+# enable to use the CPUSETS feature
+ENABLE_CPUSETS := true
+ENABLE_SCHED_BOOST := true
+
 # BT configs
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := "device/linaro/hikey/bluetooth"
 BOARD_HAVE_BLUETOOTH := true
