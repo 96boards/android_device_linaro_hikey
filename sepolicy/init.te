@@ -10,3 +10,5 @@ allow init self:capability { sys_module sys_pacct };
 allow init bootchart_data_file:file { append };
 
 allow init shell_data_file:lnk_file { getattr };
+
+allow init sysfs:dir write;
