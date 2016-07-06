@@ -17,24 +17,6 @@
 # Adjust the dalvik heap to be appropriate for a tablet.
 $(call inherit-product-if-exists, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-LOCAL_KERNEL := device/linaro/hikey-kernel/Image-dtb
-LOCAL_DTB := device/linaro/hikey-kernel/hi6220-hikey.dtb
-LOCAL_FSTAB := fstab.hikey
-else
-LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-LOCAL_DTB := $(TARGET_PREBUILT_DTB)
-LOCAL_FSTAB := $(TARGET_FSTAB)
-endif
-
-PRODUCT_COPY_FILES +=   $(LOCAL_KERNEL):kernel \
-                        $(LOCAL_DTB):hi6220-hikey.dtb \
-			$(LOCAL_PATH)/$(LOCAL_FSTAB):root/fstab.hikey \
-			$(LOCAL_PATH)/init.hikey.rc:root/init.hikey.rc \
-			$(LOCAL_PATH)/init.hikey.usb.rc:root/init.hikey.usb.rc \
-			$(LOCAL_PATH)/ueventd.hikey.rc:root/ueventd.hikey.rc \
-			$(LOCAL_PATH)/hikey.kl:system/usr/keylayout/hikey.kl
-
 # Set custom settings
 DEVICE_PACKAGE_OVERLAYS := device/linaro/hikey/overlay
 
@@ -42,28 +24,24 @@ DEVICE_PACKAGE_OVERLAYS := device/linaro/hikey/overlay
 PRODUCT_PACKAGES += ssh sftp scp sshd ssh-keygen sshd_config start-ssh uim
 
 # Add wifi-related packages
-PRODUCT_PACKAGES += libwpa_client wpa_supplicant hostapd
+PRODUCT_PACKAGES += libwpa_client wpa_supplicant hostapd wificond wifilogd
 PRODUCT_PROPERTY_OVERRIDES += wifi.interface=wlan0 \
                               wifi.supplicant_scan_interval=15
 
 # Build and run only ART
 PRODUCT_RUNTIMES := runtime_libart_default
 
-# Build HiKey HDMI, bluetooth a2dp and usb audio HALs
-PRODUCT_PACKAGES += audio.primary.hikey \
-		    audio.a2dp.default \
+# Build default bluetooth a2dp and usb audio HALs
+PRODUCT_PACKAGES += audio.a2dp.default \
 		    audio.usb.default \
 		    audio.r_submix.default \
 		    tinyplay
 
-# Include USB speed switch App
-PRODUCT_PACKAGES += UsbSpeedSwitch
-
-# Build libion
-PRODUCT_PACKAGES += libion
-
-# Build gralloc for hikey
-PRODUCT_PACKAGES += gralloc.hikey
+PRODUCT_PACKAGES += \
+    android.hardware.audio@2.0-impl \
+    android.hardware.audio.effect@2.0-impl \
+    android.hardware.broadcastradio@1.0-impl \
+    android.hardware.soundtrigger@2.0-impl
 
 # Set zygote config
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.zygote=zygote64_32
@@ -76,7 +54,7 @@ PRODUCT_PACKAGES +=	TIInit_11.8.32.bts \
 			wl18xx-conf.bin
 
 # PowerHAL
-PRODUCT_PACKAGES += power.hikey
+PRODUCT_PACKAGES += android.hardware.power@1.0-impl
 
 # Copy hardware config file(s)
 PRODUCT_COPY_FILES +=  \
@@ -87,9 +65,6 @@ PRODUCT_COPY_FILES +=  \
         frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
         frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml
 
-# Include vendor binaries
-$(call inherit-product-if-exists, vendor/linaro/hikey/device-vendor.mk)
-
 # Include BT modules
 $(call inherit-product-if-exists, device/linaro/hikey/wpan/ti-wpan-products.mk)
 
@@ -98,11 +73,9 @@ PRODUCT_COPY_FILES += \
         frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
         frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
         device/linaro/hikey/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-        device/linaro/hikey/android_dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
         device/linaro/hikey/audio/audio_policy.conf:system/etc/audio_policy.conf
 
 # Copy media codecs config file
 PRODUCT_COPY_FILES += \
         device/linaro/hikey/etc/media_codecs.xml:system/etc/media_codecs.xml \
         frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml
-

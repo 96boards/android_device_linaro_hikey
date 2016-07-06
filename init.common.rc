@@ -1,4 +1,4 @@
-import init.hikey.usb.rc
+import init.${ro.hardware}.usb.rc
 
 on init
     # mount debugfs
@@ -12,7 +12,7 @@ on init
     write /proc/sys/kernel/randomize_va_space 0
 
 on fs
-    mount_all /fstab.hikey
+    mount_all /fstab.${ro.hardware}
     setprop ro.crypto.fuse_sdcard false
 
 on post-fs-data
@@ -26,11 +26,10 @@ on post-fs
     # For legacy support
     # See storage config details at http://source.android.com/tech/storage/
     # since /storage is mounted on post-fs in init.rc
-    symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
 
     # BT LED sysfs entry
-    write /sys/devices/leds/leds/bt_active/trigger "hci1rx"
+    write /sys/class/leds/bt_active/trigger "hci1rx"
 
     chmod 0666 /dev/ump
     chmod 0666 /dev/ion
@@ -48,19 +47,12 @@ on post-fs
 # Set supported opengles version
     setprop ro.opengles.version 196608
 
-# change permissions for process groups
-# https://bugs.launchpad.net/bugs/1037611
-    chmod 0660 /dev/cpuctl
-
     # update cpuset now that processors are up
-    # Foreground should contain all cores
-    write /dev/cpuset/foreground/cpus 0-7
+    # Foreground should contain most cores (7 is reserved for top-app)
+    write /dev/cpuset/foreground/cpus 0-6
 
-    # Add foreground/boost cpuset, it is used for app launches,
-    # and maybe other high priority tasks in the future.
-    # It's to be set to whatever cores should be used
-    # for short term high-priority tasks.
-    write /dev/cpuset/foreground/boost/cpus 0-7
+    # top-app gets all cpus (including reserved #7)
+    write /dev/cpuset/top-app/cpus 0-7
 
     #background contains a small subset (generally one little core)
     write /dev/cpuset/background/cpus 0
@@ -69,7 +61,18 @@ on post-fs
     # that should not run on larger cores
     # system-background is for system tasks that should only run on
     # little cores, not on bigs to be used only by init
-    write /dev/cpuset/system-background/cpus 0-4
+    write /dev/cpuset/system-background/cpus 0-3
+
+    #
+    # EAS stune boosting interfaces
+    #
+    chown system system /dev/stune/foreground/schedtune.boost
+    chown system system /dev/stune/foreground/schedtune.prefer_idle
+    chown system system /dev/stune/schedtune.boost
+    write /dev/stune/foreground/schedtune.boost 10
+    write /dev/stune/foreground/schedtune.prefer_idle 1
+    write /dev/stune/schedtune.boost 0
+
 
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector
@@ -88,7 +91,7 @@ on property:usb_speed.switch=full
 service uim /system/bin/uim
     class main
     user bluetooth
-    group bluetooth net_bt_admin system net_bt_stack
+    group bluetooth net_bt_admin system
     oneshot
 
 service wpa_supplicant /system/bin/wpa_supplicant \
@@ -96,30 +99,5 @@ service wpa_supplicant /system/bin/wpa_supplicant \
      -e/data/misc/wifi/entropy.bin  -g@android:wpa_wlan0
      socket wpa_wlan0 dgram 660 wifi wifi
      class main
-     disabled
-     oneshot
-
-service dhcpcd_wlan0 /system/bin/dhcpcd -dABKL -f /system/etc/dhcpcd/dhcpcd.conf wlan0
-     group dhcp
-     disabled
-     oneshot
-
-service dhcpcd_eth0 /system/bin/dhcpcd -dABKL -f /system/etc/dhcpcd/dhcpcd.conf eth0
-     group dhcp
-     disabled
-     oneshot
-
-service dhcpcd_usb0 /system/bin/dhcpcd -dABKL -f /system/etc/dhcpcd/dhcpcd.conf usb0
-     group dhcp
-     disabled
-     oneshot
-
-service iprenew_usb0 /system/bin/dhcpcd -n usb0
-    class main
-    disabled
-    oneshot
-
-service dhcpcd_bt-pan /system/bin/dhcpcd -dABKL -f /system/etc/dhcpcd/dhcpcd.conf bt-pan0
-     group dhcp
      disabled
      oneshot
