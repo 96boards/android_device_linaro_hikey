@@ -1,0 +1,18 @@
+These instructions will help you in flashing the prebuilt bootloader
+images and AOSP images (built from sources) on hikey960.
+
+Detailed instructions on Board setup and recovery can be found here
+https://github.com/96boards-hikey/tools-images-hikey960/blob/master/README.md
+
+Boot switch behind the board, just beneath the mezzanine connector
+slot is used to boot into recovery and bootloader modes.
+* To boot into fastboot mode everytime set switch 1 & 3 to ON state
+  and switch 2 to OFF state.
+* To boot into fastboot mode at every alternate rebooot set switch 1
+  to ON and switch 2 & 3 to OFF state.
+* To boot into recovery mode set switch 1 & 2 to ON state and switch 3
+  to OFF state
+
+Run the flash-all.sh script to update boot files using fastboot.
+It assumes that you have already build hikey960 AOSP images locally.
+$ ./flash-all.sh
