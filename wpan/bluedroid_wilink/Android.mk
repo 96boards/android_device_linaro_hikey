@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-ifeq (hikey, $(TARGET_PRODUCT))
+ifneq ($(filter hikey%, $(TARGET_PRODUCT)),)
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
