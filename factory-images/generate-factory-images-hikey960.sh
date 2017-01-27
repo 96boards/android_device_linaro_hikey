@@ -47,6 +47,11 @@ cp $ANDROID_BUILD_TOP/$DEVICE_DIR/../hikey-kernel/dt-hikey960.img tmp/$PRODUCT-$
 # copy over the update image
 cp ${SRCPREFIX}$PRODUCT-img-$BUILD.zip tmp/$PRODUCT-$VERSION/image-$PRODUCT-$VERSION.zip
 
+# XXX hikey960's fastboot update currently doesn't format cache/userdata, so do it manually
+# XXX Remove this when the bug is fixed.
+cp $ANDROID_BUILD_TOP/out/target/product/hikey960/cache.img tmp/$PRODUCT-$VERSION/
+cp $ANDROID_BUILD_TOP/out/target/product/hikey960/userdata.img tmp/$PRODUCT-$VERSION/
+
 
 # Write flash-all.sh
 cat > tmp/$PRODUCT-$VERSION/flash-all.sh << EOF
@@ -76,6 +81,12 @@ fastboot flash vector		vector.img
 fastboot flash fw_lpm3		lpm3.img
 fastboot flash trustfirmware	bl31.bin
 fastboot flash dts		dt-hikey960.img
+
+# XXX fastboot update doesn't format cache and userdata
+# XXX so flash those manually. Remove this later.
+fastboot flash cache		cache.img
+fastboot flash userdata		userdata.img
+
 fastboot update image-$PRODUCT-$VERSION.zip
 EOF
 
