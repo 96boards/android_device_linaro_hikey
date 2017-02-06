@@ -4,8 +4,15 @@ images and AOSP images (built from sources) on hikey960.
 Detailed instructions on Board setup and recovery can be found here
 https://github.com/96boards-hikey/tools-images-hikey960/blob/master/README.md
 
-Boot switch behind the board, just beneath the mezzanine connector
-slot is used to boot into recovery and bootloader modes.
+There are two versions of HiKey960: v1 and v2.
+* v1 is using Jumper (J2001)
+* v2 is using DIP switch (SW2201).
+Both are located at the bottom side of the board.
+
+Jumper Pin 1-2 = DIP switch 1
+Jumper Pin 3-4 = DIP switch 2
+JUmper Pin 5-6 = DIP switch 3
+
 * To boot into fastboot mode everytime set switch 1 & 3 to ON state
   and switch 2 to OFF state.
 * To boot into fastboot mode at every alternate rebooot set switch 1
