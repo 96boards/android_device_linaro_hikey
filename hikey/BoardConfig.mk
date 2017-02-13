@@ -7,6 +7,9 @@ else
 BOARD_KERNEL_CMDLINE := console=ttyFIQ0 androidboot.console=ttyFIQ0 androidboot.hardware=hikey firmware_class.path=/system/etc/firmware efi=noruntime
 endif
 
+
+TARGET_NO_DTIMAGE := true
+
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1610612736
 ifeq ($(TARGET_USERDATAIMAGE_4GB), true)
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 1595915776

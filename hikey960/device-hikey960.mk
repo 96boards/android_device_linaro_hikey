@@ -15,8 +15,7 @@
 #
 
 PRODUCT_COPY_FILES +=	device/linaro/hikey-kernel/Image.gz-hikey960:kernel \
-			device/linaro/hikey-kernel/hi3660-hikey960.dtb:hi3660-hikey960.dtb \
-			device/linaro/hikey-kernel/dt-hikey960.img:dt.img
+			device/linaro/hikey-kernel/hi3660-hikey960.dtb:hi3660-hikey960.dtb
 
 PRODUCT_COPY_FILES +=	$(LOCAL_PATH)/fstab.hikey960:root/fstab.hikey960 \
 			device/linaro/hikey/init.common.rc:root/init.hikey960.rc \
