@@ -29,5 +29,7 @@ PRODUCT_PACKAGES += wl1271-nvs.bin
 # Build HiKey960 HDMI audio HAL. Experimental only may not work. FIXME
 PRODUCT_PACKAGES += audio.primary.hikey960
 
+PRODUCT_PACKAGES += power.hikey960
+
 # Include vendor binaries
 $(call inherit-product-if-exists, vendor/linaro/hikey960/device-vendor.mk)
