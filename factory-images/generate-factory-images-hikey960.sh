@@ -42,7 +42,7 @@ cp $ANDROID_BUILD_TOP/$DEVICE_DIR/installer/hikey960/sec_xloader.img tmp/$PRODUC
 cp $ANDROID_BUILD_TOP/$DEVICE_DIR/installer/hikey960/vector.img tmp/$PRODUCT-$VERSION/
 
 # copy over dts.img
-cp $ANDROID_BUILD_TOP/$DEVICE_DIR/../hikey-kernel/dt-hikey960.img tmp/$PRODUCT-$VERSION/
+cp $ANDROID_BUILD_TOP/out/target/product/hikey960/dt.img tmp/$PRODUCT-$VERSION/
 
 # copy over the update image
 cp ${SRCPREFIX}$PRODUCT-img-$BUILD.zip tmp/$PRODUCT-$VERSION/image-$PRODUCT-$VERSION.zip
@@ -80,7 +80,7 @@ fastboot flash nvme		nvme.img
 fastboot flash vector		vector.img
 fastboot flash fw_lpm3		lpm3.img
 fastboot flash trustfirmware	bl31.bin
-fastboot flash dts		dt-hikey960.img
+fastboot flash dts		dt.img
 
 # XXX fastboot update doesn't format cache and userdata
 # XXX so flash those manually. Remove this later.
