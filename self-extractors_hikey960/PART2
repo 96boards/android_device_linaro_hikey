@@ -8,7 +8,7 @@ fi
 
 echo
 
-echo -n Type \"I ACCEPT\" if you agree to the terms of the license:\
+echo -n Type \"I ACCEPT\" if you agree to the terms of the license:\ 
 read typed
 
 if test "$typed" != I\ ACCEPT

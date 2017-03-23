@@ -14,13 +14,13 @@
 
 # Linaro blob(s) necessary for Hikey hardware
 PRODUCT_COPY_FILES := \
-    vendor/hisilicon/hikey960/proprietary/lib64/libhilog.so:system/lib64/libhilog.so \
-    vendor/hisilicon/hikey960/proprietary/libhilog.so:system/lib/libhilog.so \
-    vendor/hisilicon/hikey960/proprietary/lib64/libion.so:system/lib64/libion.so \
-    vendor/hisilicon/hikey960/proprietary/libion.so:system/lib/libion.so \
-    vendor/hisilicon/hikey960/proprietary/lib64/gralloc.hikey960.so:system/lib64/hw/gralloc.hikey960.so \
-    vendor/hisilicon/hikey960/proprietary/gralloc.hikey960.so:system/lib/hw/gralloc.hikey960.so \
-    vendor/hisilicon/hikey960/proprietary/lib64/hwcomposer.hikey960.so:system/vendor/lib64/hwcomposer.hikey960.so \
-    vendor/hisilicon/hikey960/proprietary/hwcomposer.hikey960.so:system/vendor/lib/hwcomposer.hikey960.so \
-    vendor/hisilicon/hikey960/proprietary/lib64/libhiion.so:system/vendor/lib64/libhiion.so \
-    vendor/hisilicon/hikey960/proprietary/libhiion.so:system/vendor/lib/libhiion.so
+    vendor/linaro/hikey960/hisilicon/proprietary/lib64/libhilog.so:system/lib64/libhilog.so \
+    vendor/linaro/hikey960/hisilicon/proprietary/libhilog.so:system/lib/libhilog.so \
+    vendor/linaro/hikey960/hisilicon/proprietary/lib64/libion.so:system/lib64/libion.so \
+    vendor/linaro/hikey960/hisilicon/proprietary/libion.so:system/lib/libion.so \
+    vendor/linaro/hikey960/hisilicon/proprietary/lib64/gralloc.hikey960.so:system/lib64/hw/gralloc.hikey960.so \
+    vendor/linaro/hikey960/hisilicon/proprietary/gralloc.hikey960.so:system/lib/hw/gralloc.hikey960.so \
+    vendor/linaro/hikey960/hisilicon/proprietary/lib64/hwcomposer.hikey960.so:system/vendor/lib64/hwcomposer.hikey960.so \
+    vendor/linaro/hikey960/hisilicon/proprietary/hwcomposer.hikey960.so:system/vendor/lib/hwcomposer.hikey960.so \
+    vendor/linaro/hikey960/hisilicon/proprietary/lib64/libhiion.so:system/vendor/lib64/libhiion.so \
+    vendor/linaro/hikey960/hisilicon/proprietary/libhiion.so:system/vendor/lib/libhiion.so

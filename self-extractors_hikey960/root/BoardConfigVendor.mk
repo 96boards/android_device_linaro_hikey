@@ -12,6 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-LOCAL_STEM := hikey/BoardConfigPartial.mk
+LOCAL_STEM := hikey960/BoardConfigPartial.mk
 
 -include vendor/linaro/$(LOCAL_STEM)
