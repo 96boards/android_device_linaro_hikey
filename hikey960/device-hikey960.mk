@@ -23,9 +23,6 @@ PRODUCT_COPY_FILES +=	$(LOCAL_PATH)/fstab.hikey960:root/fstab.hikey960 \
 			device/linaro/hikey/ueventd.common.rc:root/ueventd.hikey960.rc \
 			device/linaro/hikey/common.kl:system/usr/keylayout/hikey960.kl
 
-# Copy prebuilt nvs calibation file for wl12xx
-PRODUCT_PACKAGES += wl1271-nvs.bin
-
 # Build HiKey960 HDMI audio HAL. Experimental only may not work. FIXME
 PRODUCT_PACKAGES += audio.primary.hikey960
 
