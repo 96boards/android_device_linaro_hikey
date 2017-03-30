@@ -40,7 +40,11 @@ include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := wl18xx-conf.bin
+ifeq ($(TARGET_PRODUCT),hikey960)
+LOCAL_SRC_FILES := wl18xx-conf-wl1837mod.bin
+else
 LOCAL_SRC_FILES := wl18xx-conf.bin
+endif
 LOCAL_MODULE_CLASS := FIRMWARE
 LOCAL_MODULE_PATH := $(TI_WILINK_FW_PATH)
 LOCAL_MODULE_TAGS := optional
