@@ -19,7 +19,6 @@ fastboot flash xloader "${INSTALLER_DIR}"/sec_xloader.img
 fastboot flash fastboot "${INSTALLER_DIR}"/fastboot.img
 fastboot flash ptable "${INSTALLER_DIR}"/ptable.img
 fastboot flash nvme "${INSTALLER_DIR}"/nvme.img
-fastboot flash vector "${INSTALLER_DIR}"/vector.img
 fastboot flash fw_lpm3   "${INSTALLER_DIR}"/lpm3.img
 fastboot flash trustfirmware   "${INSTALLER_DIR}"/bl31.bin
 fastboot flash boot "${ANDROID_PRODUCT_OUT}"/boot.img

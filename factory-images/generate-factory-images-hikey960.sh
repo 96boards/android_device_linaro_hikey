@@ -39,7 +39,6 @@ cp $ANDROID_BUILD_TOP/$DEVICE_DIR/installer/hikey960/nvme.img tmp/$PRODUCT-$VERS
 cp $ANDROID_BUILD_TOP/$DEVICE_DIR/installer/hikey960/ptable.img tmp/$PRODUCT-$VERSION/
 cp $ANDROID_BUILD_TOP/$DEVICE_DIR/installer/hikey960/README tmp/$PRODUCT-$VERSION/
 cp $ANDROID_BUILD_TOP/$DEVICE_DIR/installer/hikey960/sec_xloader.img tmp/$PRODUCT-$VERSION/
-cp $ANDROID_BUILD_TOP/$DEVICE_DIR/installer/hikey960/vector.img tmp/$PRODUCT-$VERSION/
 
 # copy over dts.img
 cp $ANDROID_BUILD_TOP/out/target/product/hikey960/dt.img tmp/$PRODUCT-$VERSION/
@@ -77,7 +76,6 @@ fastboot flash xloader		sec_xloader.img
 fastboot flash fastboot		fastboot.img
 fastboot flash ptable		ptable.img
 fastboot flash nvme		nvme.img
-fastboot flash vector		vector.img
 fastboot flash fw_lpm3		lpm3.img
 fastboot flash trustfirmware	bl31.bin
 fastboot flash dts		dt.img
